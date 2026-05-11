@@ -46,9 +46,64 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (heldObject == null) TryPickUp();
-        else DropObject();
-        UpdateAmmoUI();
+         RaycastHit hit;
+
+    if (Physics.Raycast(
+        cam.transform.position,
+        cam.transform.forward,
+        out hit,
+        reachDistance))
+    {
+        // BUSCAR GENERADOR
+        Generador generator = hit.collider.GetComponent<Generador>();
+
+        if (generator != null)
+        {
+            // SI TENEMOS UN OBJETO EN LA MANO
+            if (heldObject != null)
+            {
+                // SI EL OBJETO ES NAFTA
+                if (heldObject.CompareTag("Fuel"))
+                {
+                    // AGREGAR NAFTA
+                    generator.AddFuel(heldObject);
+
+                    // LIMPIAR MANO
+                    heldObject = null;
+                    heldWeapon = null;
+
+                    // PRENDER GENERADOR
+                    generator.TurnOn();
+
+                    UpdateAmmoUI();
+
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Ese objeto no sirve como combustible");
+                    return;
+                }
+            }
+            else
+            {
+                Debug.Log("Necesitás un bidón de nafta");
+                return;
+            }
+        }
+    }
+
+    // SISTEMA NORMAL DE AGARRAR/SOLTAR
+    if (heldObject == null)
+    {
+        TryPickUp();
+    }
+    else
+    {
+        DropObject();
+    }
+
+    UpdateAmmoUI();
     }
 
     private void OnShoot(InputAction.CallbackContext context)

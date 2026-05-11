@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wood
   - Gravel
+  - Fuel
   layers:
   - Default
   - TransparentFX
