@@ -65,8 +65,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1067929284349639088, guid: 674adf642abf5614aae2995443c8250f, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1067929284349639088, guid: 674adf642abf5614aae2995443c8250f, type: 3}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1067929284349639088, guid: 674adf642abf5614aae2995443c8250f, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2166306331909546791, guid: 674adf642abf5614aae2995443c8250f, type: 3}
       propertyPath: m_Enabled
