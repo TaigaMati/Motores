@@ -7,16 +7,16 @@ public class BossHouseTrigger : MonoBehaviour
     public GameObject stop;
 
    
-    // Bandera para controlar que solo se muestre una vez
+    
     private bool alreadyShown = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !alreadyShown)
         {
-            alreadyShown = true; // marcamos que ya se mostró
+            alreadyShown = true; 
             stop.gameObject.SetActive(true);
-            StartCoroutine(HideTextAfterSeconds(3f)); // mostrar por 3 segundos
+            StartCoroutine(HideTextAfterSeconds(3f)); 
         }
     }
 

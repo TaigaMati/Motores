@@ -6,7 +6,7 @@ public class Apagon : MonoBehaviour
 
     void Start()
     {
-        // Busca TODAS las luces en el objeto y sus hijos
+        
         lights = GetComponentsInChildren<Light>();
     }
 

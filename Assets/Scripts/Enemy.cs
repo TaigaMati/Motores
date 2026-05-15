@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     private int currentHealth;
 
-    // Referencia al controlador del enemigo
+    
     public EnemyController controller;
 
     void Start()
@@ -26,10 +26,10 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            // APAGA TODAS LAS LUCES
+            
             PowerManager.Instance.CutPower();
 
-            // MUERTE DEL ENEMIGO
+            
             controller.Die();
         }
     }

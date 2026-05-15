@@ -9,13 +9,15 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private Transform holdPosition;
 
     private GameObject heldObject = null;
-    private Shot heldWeapon = null; 
+    private Shot heldWeapon = null;
     private Camera cam;
 
     private PlayerInputAction controls;
 
     [Header("UI")]
-    public TextMeshProUGUI ammoText; // referencia al texto en el Canvas
+    public TextMeshProUGUI ammoText;
+
+    public Shot HeldWeapon => heldWeapon;
 
     void Awake()
     {
@@ -25,15 +27,16 @@ public class PlayerInteraction : MonoBehaviour
 
     void Start()
     {
-        UpdateAmmoUI(); // inicializa el HUD correctamente al arrancar
+        UpdateAmmoUI();
     }
 
     void OnEnable()
     {
         controls.Enable();
-        controls.Player.Interactions.performed += OnInteract;
+        controls.Player.Interactions.performed += OnInteract; // E para recoger
         controls.Player.Shoot.performed += OnShoot;
         controls.Player.Reload.performed += OnReload;
+        controls.Player.Drop.performed += OnDrop; // Q para soltar
     }
 
     void OnDisable()
@@ -41,69 +44,19 @@ public class PlayerInteraction : MonoBehaviour
         controls.Player.Interactions.performed -= OnInteract;
         controls.Player.Shoot.performed -= OnShoot;
         controls.Player.Reload.performed -= OnReload;
+        controls.Player.Drop.performed -= OnDrop;
         controls.Disable();
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-         RaycastHit hit;
-
-    if (Physics.Raycast(
-        cam.transform.position,
-        cam.transform.forward,
-        out hit,
-        reachDistance))
-    {
-        // BUSCAR GENERADOR
-        Generador generator = hit.collider.GetComponent<Generador>();
-
-        if (generator != null)
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, reachDistance, interactableLayer))
         {
-            // SI TENEMOS UN OBJETO EN LA MANO
-            if (heldObject != null)
-            {
-                // SI EL OBJETO ES NAFTA
-                if (heldObject.CompareTag("Fuel"))
-                {
-                    // AGREGAR NAFTA
-                    generator.AddFuel(heldObject);
-
-                    // LIMPIAR MANO
-                    heldObject = null;
-                    heldWeapon = null;
-
-                    // PRENDER GENERADOR
-                    generator.TurnOn();
-
-                    UpdateAmmoUI();
-
-                    return;
-                }
-                else
-                {
-                    Debug.Log("Ese objeto no sirve como combustible");
-                    return;
-                }
-            }
-            else
-            {
-                Debug.Log("Necesitás un bidón de nafta");
-                return;
-            }
+            if (heldObject == null && hit.collider.CompareTag("Weapon"))
+                TryPickUp(hit.collider.gameObject);
         }
-    }
-
-    // SISTEMA NORMAL DE AGARRAR/SOLTAR
-    if (heldObject == null)
-    {
-        TryPickUp();
-    }
-    else
-    {
-        DropObject();
-    }
-
-    UpdateAmmoUI();
+        UpdateAmmoUI();
     }
 
     private void OnShoot(InputAction.CallbackContext context)
@@ -124,21 +77,24 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    void TryPickUp()
+    private void OnDrop(InputAction.CallbackContext context)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, reachDistance, interactableLayer))
-        {
-            heldObject = hit.collider.gameObject;
-            Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-            if (rb != null) rb.isKinematic = true;
+        if (heldObject != null)
+            DropObject();
+    }
 
-            heldObject.transform.SetParent(holdPosition);
-            heldObject.transform.localPosition = Vector3.zero;
-            heldObject.transform.localRotation = Quaternion.identity;
+    void TryPickUp(GameObject target)
+    {
+        heldObject = target;
+        Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = true;
 
-            heldWeapon = heldObject.GetComponent<Shot>();
-        }
+        heldObject.transform.SetParent(holdPosition);
+        heldObject.transform.localPosition = Vector3.zero;
+        heldObject.transform.localRotation = Quaternion.identity;
+
+        heldWeapon = heldObject.GetComponent<Shot>();
+        UpdateAmmoUI();
     }
 
     void DropObject()
@@ -148,19 +104,18 @@ public class PlayerInteraction : MonoBehaviour
 
         heldObject.transform.SetParent(null);
         heldObject = null;
-        heldWeapon = null; 
+        heldWeapon = null;
         UpdateAmmoUI();
     }
 
-    void UpdateAmmoUI()
+    public void UpdateAmmoUI()
     {
         if (ammoText != null)
         {
             if (heldWeapon != null)
-                ammoText.text = heldWeapon.currentAmmo + " / " + heldWeapon.maxAmmo;
+                ammoText.text = heldWeapon.currentAmmo + " / " + heldWeapon.totalAmmo;
             else
                 ammoText.text = ""; // vacío si no tenés arma
         }
     }
-}
-
+ }

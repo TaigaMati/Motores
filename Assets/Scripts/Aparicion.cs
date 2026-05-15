@@ -14,7 +14,7 @@ public class AparicionNina : MonoBehaviour
         {
             activado = true;
 
-            // 🔊 reproducir sonido atrás
+            
             audioAtras.Play();
 
             StartCoroutine(MostrarNina());
