@@ -225,8 +225,9 @@ public class PrimeraPersona : MonoBehaviour
         {
             isCrouching = true;
             _characterController.height = crouchHeight;
-            _characterController.center = new Vector3(originalCenter.x, crouchHeight / 2f, originalCenter.z);
+            _characterController.center = new Vector3(originalCenter.x, crouchHeight / 3f, originalCenter.z);
             Debug.Log("Agachado");
+
         }
         else if (context.canceled)
         {
@@ -234,6 +235,7 @@ public class PrimeraPersona : MonoBehaviour
             _characterController.height = originalHeight;
             _characterController.center = originalCenter;
             Debug.Log("De pie");
+                                   
         }
     }
 
@@ -267,6 +269,6 @@ public class PrimeraPersona : MonoBehaviour
     {
         PlayerAnim.SetFloat("X", newDirection.x);
         PlayerAnim.SetFloat("Y", newDirection.y);
-        //PlayerAnim.SetBool("isCrouching", isCrouching);//
+        PlayerAnim.SetBool("isCrouching", isCrouching);//
     }
 }
