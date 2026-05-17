@@ -3,26 +3,23 @@ using UnityEngine.SceneManagement;
 
 public class MenuDerrota : MonoBehaviour
 {
-    public GameObject defeatMenu; 
-
-    
-    public void ShowDefeatMenu()
+    // Llama a esto cuando el jugador muera para ir a la escena de derrota
+    public void CargarEscenaDerrota()
     {
-        defeatMenu.SetActive(true);
-        Time.timeScale = 0f; 
+        // Asegúrate de que el tiempo corra normal por si acaso
+        Time.timeScale = 1f; 
+        SceneManager.LoadScene("Derrota"); // <--- Pon acá el nombre EXACTO de tu escena de derrota
     }
 
-    
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f; 
-        SceneManager.LoadScene("Menuinicio"); 
+        SceneManager.LoadScene("MenuInicio"); 
     }
 
-    
     public void QuitGame()
     {
-        Debug.Log("El jugador salió del juego desde el menú de derrota.");
+        Debug.Log("El jugador salió del juego.");
         Application.Quit();
     }
 }

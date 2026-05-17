@@ -25250,6 +25250,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e9c45dbc617aa04a9b86cb793820642, type: 3}
       insertIndex: -1
       addedObject: {fileID: 494318767}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e9c45dbc617aa04a9b86cb793820642, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 494318768}
   m_SourcePrefab: {fileID: 100100000, guid: 4e9c45dbc617aa04a9b86cb793820642, type: 3}
 --- !u!1 &494318761 stripped
 GameObject:
@@ -25373,6 +25376,20 @@ MonoBehaviour:
     m_Bits: 64
   holdPosition: {fileID: 1993606297}
   ammoText: {fileID: 817354424}
+--- !u!114 &494318768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494318761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1746a26cb9ceab44851a6005a51dd63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControladorVida
+  vidaMaxima: 100
+  nombreEscenaDerrota: Derrota
 --- !u!1001 &494627043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102993,8 +103010,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7150226613703674756, guid: 5abc405db277d7f4fb7c27f0432584e2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1055670037022972145}
   m_SourcePrefab: {fileID: 100100000, guid: 5abc405db277d7f4fb7c27f0432584e2, type: 3}
+--- !u!1 &1055670037022972144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7150226613703674756, guid: 5abc405db277d7f4fb7c27f0432584e2, type: 3}
+  m_PrefabInstance: {fileID: 1055670037022972143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1055670037022972145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055670037022972144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3445238269469443b350056ce4f9ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AtaqueEnemigo
+  danioAtaque: 50
+  rangoAtaque: 2
+  Player:
+    serializedVersion: 2
+    m_Bits: 1
+  puntoAtaque: {fileID: 0}
 --- !u!1001 &4764719755269869610
 PrefabInstance:
   m_ObjectHideFlags: 0
