@@ -25161,15 +25161,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e9c45dbc617aa04a9b86cb793820642, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 126.51
+      value: 226.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e9c45dbc617aa04a9b86cb793820642, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9
+      value: 1.091
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e9c45dbc617aa04a9b86cb793820642, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 167.53
+      value: 354.278
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e9c45dbc617aa04a9b86cb793820642, type: 3}
       propertyPath: m_LocalRotation.w
@@ -56406,7 +56406,7 @@ MonoBehaviour:
       Data2: 1133953910
       Data3: 1966635410
       Data4: 567224887
-    Path: event:/PistolShot
+    Path: event:/ShotgunShot
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -74422,11 +74422,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 586377138
-      Data2: 1133953910
-      Data3: 1966635410
-      Data4: 567224887
-    Path: event:/PistolShot
+      Data1: 257660734
+      Data2: 1156611304
+      Data3: 1964675460
+      Data4: -1842261562
+    Path: event:/ChumbazoPistol
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
@@ -75906,6 +75906,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a0648e71464a9ff4aa735a80c15c4a1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1611580443}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a0648e71464a9ff4aa735a80c15c4a1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1611580445}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a0648e71464a9ff4aa735a80c15c4a1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1611580447}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a0648e71464a9ff4aa735a80c15c4a1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1611580446}
   m_SourcePrefab: {fileID: 100100000, guid: a0648e71464a9ff4aa735a80c15c4a1d, type: 3}
 --- !u!1 &1611580439 stripped
 GameObject:
@@ -75945,6 +75954,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23aa6e8c66e1c2b449c66d9332582d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Phone
+  Ring: {fileID: 1611580445}
+  Pickup: {fileID: 1611580446}
+  Hangup: {fileID: 1611580447}
   panelPhone: {fileID: 1278799243}
   houseCall: {fileID: 2008436103}
 --- !u!54 &1611580443
@@ -75974,6 +75986,99 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1611580445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611580439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1736000305
+      Data2: 1103538294
+      Data3: 136454040
+      Data4: 1248739633
+    Path: event:/Phone
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1611580446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611580439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -616853536
+      Data2: 1258001280
+      Data3: 720443781
+      Data4: 414265271
+    Path: event:/PhonePickup
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1611580447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611580439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1710370169
+      Data2: 1255859219
+      Data3: -2046811725
+      Data4: -823732649
+    Path: event:/PhoneHangUp
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1613253434
 PrefabInstance:
   m_ObjectHideFlags: 0

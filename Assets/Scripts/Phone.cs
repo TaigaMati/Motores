@@ -1,11 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using FMODUnity;
 
 public class Phone : MonoBehaviour
 {
     [Header("Configuración")]
     [Tooltip("Arrastra aquí el panel que quieres desactivar")]
+    public StudioEventEmitter Ring;
+    public StudioEventEmitter Pickup;
+    public StudioEventEmitter Hangup;
+    private bool PhoneAnswered = false;
     public GameObject panelPhone;
     public GameObject houseCall;
 
@@ -17,11 +22,19 @@ public class Phone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Asegúrate de que el jugador tenga el tag "Player"
+        if(PhoneAnswered == false)
+        {
+            Ring.Play();
+        }
         if (other.CompareTag("Player")) isRange = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (PhoneAnswered == true)
+        {
+            Hangup.Play();
+        }
         if (other.CompareTag("Player")) isRange = false;
     }
 
@@ -39,6 +52,9 @@ public class Phone : MonoBehaviour
         if (panelPhone != null)
         {
             // Usamos ! para invertir el estado, por si quieres que también se vuelva a activar
+            PhoneAnswered = true;
+            Pickup.Play();
+            Ring.Stop();
             panelPhone.SetActive(false);
             houseCall.SetActive(true);
             StartCoroutine(HideTextAfterSeconds(10f)); // mostrar por 3 segundos
