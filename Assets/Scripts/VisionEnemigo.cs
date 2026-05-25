@@ -102,9 +102,15 @@ public class EnemyController : MonoBehaviour
         else
         {
             // Ataque
-            isAttacking = true;
             rb.linearVelocity = Vector3.zero;
-            SetAnimationStates(true, true, false);
+
+            // ¡ESTE ES EL CAMBIO!: Solo activa el ataque si no estaba atacando ya.
+            // Así evitamos resetear la animación y permitimos que corra hasta el fotograma del daño.
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                SetAnimationStates(true, true, false);
+            }
         }
     }
 

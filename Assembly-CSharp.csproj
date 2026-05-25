@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Assets\assets\Nokobot\Modern Guns - Handgun\_Demo Assets\SimpleShoot.cs" />
     <Compile Include="Assets\Scripts\Phone.cs" />
+    <Compile Include="Assets\Scripts\PlayerDaño.cs" />
     <Compile Include="Assets\Scripts\FirstPersonCamera.cs" />
     <Compile Include="Assets\Scripts\AmmoPickup.cs" />
     <Compile Include="Assets\Scripts\Aparicion.cs" />
@@ -58,10 +59,12 @@
     <Compile Include="Assets\Scripts\Shot.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\assets\Low Poly Guns\Scripts\GunView.cs" />
+    <Compile Include="Assets\Scripts\Alienmovimiento.cs" />
     <Compile Include="Assets\Scripts\BossHouse.cs" />
     <Compile Include="Assets\Scripts\ClosedDoor.cs" />
     <Compile Include="Assets\Scripts\PlayerFootsteps.cs" />
     <Compile Include="Assets\assets\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\PT_MouseLook.cs" />
+    <Compile Include="Assets\Scripts\EnemyDaño.cs" />
     <Compile Include="Assets\Scripts\Generador.cs" />
     <Compile Include="Assets\Scripts\Apagon.cs" />
     <Compile Include="Assets\Scripts\PowerManager.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Assets\Scripts\VisionEnemigo.cs" />
     <Compile Include="Assets\Scripts\PlayerInputAction.cs" />
     <Compile Include="Assets\Scripts\PlayerInteraction.cs" />
+    <Compile Include="Assets\Scripts\AlienIteraction.cs" />
     <Compile Include="Assets\assets\Low Poly Guns\Scripts\GunsMenu.cs" />
     <Compile Include="Assets\Scripts\MenuDerrota.cs" />
   </ItemGroup>
