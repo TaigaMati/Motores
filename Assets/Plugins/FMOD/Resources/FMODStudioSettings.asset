@@ -634,8 +634,11 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
+  - Desktop/Master
   Banks:
   - 3DSounds
+  - Desktop/3DSounds
+  - Desktop/Fondo
   - Fondo
   BanksToLoad: []
   LiveUpdatePort: 9264

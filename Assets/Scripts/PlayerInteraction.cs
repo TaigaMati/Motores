@@ -33,10 +33,10 @@ public class PlayerInteraction : MonoBehaviour
     void OnEnable()
     {
         controls.Enable();
-        controls.Player.Interactions.performed += OnInteract; // E para recoger
+        controls.Player.Interactions.performed += OnInteract; 
         controls.Player.Shoot.performed += OnShoot;
         controls.Player.Reload.performed += OnReload;
-        controls.Player.Drop.performed += OnDrop; // Q para soltar
+        controls.Player.Drop.performed += OnDrop; 
     }
 
     void OnDisable()
@@ -53,8 +53,27 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, reachDistance, interactableLayer))
         {
-            if (heldObject == null && hit.collider.CompareTag("Weapon"))
-                TryPickUp(hit.collider.gameObject);
+           
+            if (heldObject == null)
+            {
+                if (hit.collider.CompareTag("Weapon") || hit.collider.CompareTag("Fuel"))
+                {
+                    TryPickUp(hit.collider.gameObject);
+                }
+            }
+            else
+            {
+                
+                if (hit.collider.CompareTag("Generator") && heldObject.CompareTag("Fuel"))
+                {
+                    Generador gen = hit.collider.GetComponent<Generador>();
+                    if (gen != null)
+                    {
+                        gen.AddFuel(heldObject);
+                        DropObject(); 
+                    }
+                }
+            }
         }
         UpdateAmmoUI();
     }
@@ -115,7 +134,7 @@ public class PlayerInteraction : MonoBehaviour
             if (heldWeapon != null)
                 ammoText.text = heldWeapon.currentAmmo + " / " + heldWeapon.totalAmmo;
             else
-                ammoText.text = ""; // vacío si no tenés arma
+                ammoText.text = "";
         }
     }
- }
+}

@@ -9,6 +9,7 @@ TagManager:
   - Fuel
   - AmmoBox
   - Weapon
+  - Generator
   layers:
   - Default
   - TransparentFX

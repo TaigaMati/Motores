@@ -4,20 +4,21 @@ public class PowerManager : MonoBehaviour
 {
     public static PowerManager Instance;
 
-    public bool powerOn = true;
+    public bool powerOn = false;
 
-    private void Awake()
+    void Awake()
     {
         Instance = this;
+    }
+    public void RestorePower()
+    {
+        powerOn = true;
+        Debug.Log(" Energía restaurada");
     }
 
     public void CutPower()
     {
         powerOn = false;
-    }
-
-    public void RestorePower()
-    {
-        powerOn = true;
+        Debug.Log(" Energía cortada");
     }
 }

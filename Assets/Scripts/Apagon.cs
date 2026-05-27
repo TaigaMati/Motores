@@ -6,8 +6,7 @@ public class Apagon : MonoBehaviour
 
     void Start()
     {
-        
-        lights = GetComponentsInChildren<Light>();
+           lights = GetComponentsInChildren<Light>();
     }
 
     void Update()
