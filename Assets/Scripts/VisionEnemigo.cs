@@ -134,7 +134,7 @@ public class EnemyController : MonoBehaviour
 
     private void SetAnimationStates(bool chasing, bool attacking, bool walking)
     {
-        // Solo enviamos cambios si el valor es distinto para optimizar
+        
         if (animator.GetBool("isChasing") != chasing) animator.SetBool("isChasing", chasing);
         if (animator.GetBool("isAttacking") != attacking) animator.SetBool("isAttacking", attacking);
         //if (animator.GetBool("isWalking") != walking) animator.SetBool("isWalking", walking);
