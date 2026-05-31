@@ -9,8 +9,9 @@ public class PowerManager : MonoBehaviour
 
     // para activar panel de texto
     [Header("Referencia al texto UI")]
-    public GameObject panelText;
-    private bool activePanelText = false;
+    public GameObject panelTextCutPower;
+    public GameObject panelTextRestorePower;
+
 
     void Awake()
     {
@@ -20,6 +21,10 @@ public class PowerManager : MonoBehaviour
     {
         powerOn = true;
         Debug.Log(" Energía restaurada");
+        // para activar el panel de texto
+        panelTextRestorePower.gameObject.SetActive(true);
+        panelTextCutPower.gameObject.SetActive(false);
+        StartCoroutine(HideTextAfterSeconds(5f));
     }
 
     public void CutPower()
@@ -27,14 +32,15 @@ public class PowerManager : MonoBehaviour
         powerOn = false;
         Debug.Log(" Energía cortada");
         // para activar panel de texto
-        activePanelText = true;
-        panelText.gameObject.SetActive(true);
+        panelTextCutPower.gameObject.SetActive(true);
         StartCoroutine(HideTextAfterSeconds(15f));
     }
 
+    // Coroutine duración de los paneles
     private System.Collections.IEnumerator HideTextAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        panelText.gameObject.SetActive(false);
+        panelTextCutPower.gameObject.SetActive(false);
+        panelTextRestorePower.gameObject.SetActive(false);
     }
 }
