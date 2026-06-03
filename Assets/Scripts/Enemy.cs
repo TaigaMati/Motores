@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
 
@@ -7,8 +8,9 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 3;
 
     private int currentHealth;
+    public StudioEventEmitter Hurt;
+    public StudioEventEmitter Ded;
 
-    
     public EnemyController controller;
 
     void Start()
@@ -18,6 +20,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        Hurt.Play();
         currentHealth -= amount;
 
         Debug.Log("⚔️ " + gameObject.name +
@@ -26,7 +29,7 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            
+            Ded.Play();
             PowerManager.Instance.CutPower();
 
             

@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class EnemyDaño : MonoBehaviour
@@ -5,7 +6,7 @@ public class EnemyDaño : MonoBehaviour
     [Header("Configuración de Ataque")]
     [SerializeField] private int danioAtaque = 20;
     [SerializeField] private float rangoAtaque = 2.0f;
-
+    public StudioEventEmitter Attack;
     // El Tag que buscaremos en el jugador (por defecto "Player")
     [SerializeField] private string tagJugador = "Player";
 
@@ -29,6 +30,7 @@ public class EnemyDaño : MonoBehaviour
     {
         // Detecta TODOS los colisionadores en el rango de ataque
         Collider[] objetosImpactados = Physics.OverlapSphere(puntoAtaque.position, rangoAtaque);
+        Attack.Play();
 
         foreach (Collider hit in objetosImpactados)
         {
@@ -53,6 +55,7 @@ public class EnemyDaño : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (puntoAtaque == null) return;
+        Attack.Play();
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(puntoAtaque.position, rangoAtaque);
     }

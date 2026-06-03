@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4edb2690-369b-4566-b859-ac79e9f4daae}">
+		<property name="assetPath">
+			<value>GeneradorEncendido.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.448</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d84bd9b0-e600-4878-af16-ca6ffc238c4c}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -17,6 +18,10 @@ public class EnemyController : MonoBehaviour
     private bool isAttacking = false;
     public bool isDead = false;
     //private bool isWalking = false; // Estado para cuando sale del rango
+
+    public StudioEventEmitter Run;
+    public StudioEventEmitter Attack;
+    private bool runSoundPlaying = false;
 
     void Update()
     {
@@ -45,7 +50,6 @@ public class EnemyController : MonoBehaviour
 
         Vector3 direction = player.position - transform.position;
         float distance = direction.magnitude;
-
         // 2. Lógica de persecución (solo si está vivo)
         if (distance < visionRange)
         {
@@ -79,6 +83,11 @@ public class EnemyController : MonoBehaviour
         // 2. Lógica de Idle (cuando no persigue)
         if (!isChasing)
         {
+            if (runSoundPlaying)
+            {
+                Run.Stop();
+                runSoundPlaying = false;
+            }
             SetAnimationStates(false, false, false);
             rb.linearVelocity = Vector3.zero;
             return;
@@ -89,6 +98,11 @@ public class EnemyController : MonoBehaviour
 
         if (distance > attackRange)
         {
+            if (!runSoundPlaying)
+            {
+                Run.Play();
+                runSoundPlaying = true;
+            }
             // Persecución
             isAttacking = false;
             Vector3 dir = (player.position - transform.position).normalized;
@@ -101,7 +115,13 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            if (runSoundPlaying)
+            {
+                Run.Stop();
+                runSoundPlaying = false;
+            }
             // Ataque
+
             rb.linearVelocity = Vector3.zero;
 
             // ¡ESTE ES EL CAMBIO!: Solo activa el ataque si no estaba atacando ya.
@@ -119,7 +139,8 @@ public class EnemyController : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
-
+        Run.Stop();      
+        Attack.Stop();   
         // 1. Limpiamos las variables de persecución/ataque del Animator
         animator.SetBool("isChasing", false);
         animator.SetBool("isAttacking", false);

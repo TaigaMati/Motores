@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,7 @@ public class PlayerDaño : MonoBehaviour
 {
     [Header("Configuración de Vida")]
     [SerializeField] private int vidaMaxima = 100;
+    public StudioEventEmitter PlayerHurt;
 
     // Propiedad pública de solo lectura para otros scripts
     public int VidaActual { get; private set; }
@@ -22,10 +24,12 @@ public class PlayerDaño : MonoBehaviour
     public void RecibirDanio(int cantidad)
     {
         // Validamos que no nos pasen daño negativo
+
         if (cantidad <= 0) return;
 
         VidaActual -= cantidad;
         Debug.Log($"El jugador recibió daño. Vida restante: {VidaActual}");
+        PlayerHurt.Play();
 
         // Controlamos que la vida no baje de 0
         if (VidaActual <= 0)

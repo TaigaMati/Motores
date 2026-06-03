@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{c12ff40f-01d7-4070-8d28-66c8f6f84cde}">
+		<property name="assetPath">
+			<value>ZombieAttack1 - stem.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>2.2727891156462583</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d84bd9b0-e600-4878-af16-ca6ffc238c4c}</destination>
+		</relationship>
+	</object>
+</objects>
