@@ -5,11 +5,11 @@ public class Enemy : MonoBehaviour
 {
     [Header("Parámetros de vida")]
     public int maxHealth = 3;
+   private int currentHealth;
 
-    private int currentHealth;
 
-    
     public EnemyController controller;
+    public MusicManager musicManager;
 
     void Start()
     {
@@ -26,11 +26,27 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            
-            PowerManager.Instance.CutPower();
+            if (musicManager != null)
+            {
+                musicManager.OnEnemyDeath();
+            }
 
-            
+            PowerManager.Instance.CutPower();
             controller.Die();
+            Destroy(gameObject);
+        }
+    }
+
+    // 👀 Detectar al jugador
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("🎵 Cambio a música de combate");
+            if (musicManager != null)
+            {
+                musicManager.OnEnemyEncounter();
+            }
         }
     }
 }

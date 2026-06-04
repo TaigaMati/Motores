@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AlienMovimiento : MonoBehaviour
 {
-    public Transform destino; // Empty GameObject en la nave
+    public Transform destino; 
     public float velocidad = 2f;
 
     private bool activado = false;

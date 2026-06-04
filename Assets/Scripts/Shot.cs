@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;  
 using System.Collections;
-using FMODUnity;
+
 
 public enum AmmoType
 {
@@ -33,6 +33,15 @@ public class Shot : MonoBehaviour
     [Header("Tipo de munición")]
     public AmmoType weaponAmmoType;
 
+    [Header("Audio")]
+    public AudioClip shootClip;       
+    private AudioSource audioSource;  
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Shoot()
     {
         if (isReloading) return;
@@ -46,8 +55,7 @@ public class Shot : MonoBehaviour
                 Quaternion.LookRotation(cam.transform.forward)
             );
 
-            newBullet.transform.parent = null;
-            GetComponent<StudioEventEmitter>().Play();
+            newBullet.transform.parent = null;            
 
             Rigidbody bulletRb = newBullet.GetComponent<Rigidbody>();
             if (bulletRb != null)
@@ -58,6 +66,12 @@ public class Shot : MonoBehaviour
             }
 
             Destroy(newBullet, 5f);
+
+            
+            if (shootClip != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(shootClip);
+            }
 
             currentAmmo--;
             shotRateTime = Time.time + shotRate;
@@ -89,8 +103,9 @@ public class Shot : MonoBehaviour
 
         currentAmmo += ammoToLoad;
         totalAmmo -= ammoToLoad;
-
-        isReloading = false;
         
+        isReloading = false;
+
     }
+
 }
