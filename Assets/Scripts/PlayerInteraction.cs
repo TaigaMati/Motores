@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using FMODUnity;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private float reachDistance = 3f;
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private Transform holdPosition;
+
+    public StudioEventEmitter Grab;
+    public StudioEventEmitter Drop;
 
     private GameObject heldObject = null;
     private Shot heldWeapon = null;
@@ -104,6 +108,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void TryPickUp(GameObject target)
     {
+        Grab.Play();
         heldObject = target;
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true;
@@ -118,6 +123,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void DropObject()
     {
+        Drop.Play();
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = false;
 

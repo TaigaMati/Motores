@@ -1,9 +1,14 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Rendering;
+using FMODUnity;
 
 public class PowerManager : MonoBehaviour
 {
     public static PowerManager Instance;
+
+    public StudioEventEmitter LightsOn;
+    public StudioEventEmitter LightsOff;
 
     public bool powerOn = false;
 
@@ -19,6 +24,7 @@ public class PowerManager : MonoBehaviour
     }
     public void RestorePower()
     {
+        LightsOn.Play();
         powerOn = true;
         Debug.Log(" Energía restaurada");
         // para activar el panel de texto
@@ -29,6 +35,7 @@ public class PowerManager : MonoBehaviour
 
     public void CutPower()
     {
+        LightsOff.Play();
         powerOn = false;
         Debug.Log(" Energía cortada");
         // para activar panel de texto

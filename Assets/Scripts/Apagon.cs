@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Apagon : MonoBehaviour
@@ -17,6 +18,7 @@ public class Apagon : MonoBehaviour
             {
                 if (lightComp != null)
                 {
+                    
                     lightComp.enabled = PowerManager.Instance.powerOn;
                 }
             }

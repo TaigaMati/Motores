@@ -1,11 +1,17 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Generador : MonoBehaviour
 {
     public bool hasFuel = false;
+    public StudioEventEmitter GeneradorOut;
+    public StudioEventEmitter GeneradorOn;
+    public StudioEventEmitter GeneradorRunning;
+    public StudioEventEmitter Pouring;
 
     public void AddFuel(GameObject fuelObject)
-    {   
+    {
+         Pouring.Play();
          hasFuel = true;
          Destroy(fuelObject);
          Debug.Log(" Nafta colocada");
@@ -16,6 +22,7 @@ public class Generador : MonoBehaviour
     {
         if (hasFuel)
         {
+            GeneradorOn.Play();
             PowerManager.Instance.RestorePower();
             Debug.Log(" Generador encendido");
         }
