@@ -1,6 +1,7 @@
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Enemy : MonoBehaviour
     public StudioEventEmitter Ded;
 
     public EnemyController controller;
+
+    // Este es el evento global que avisará a otros scripts que este enemigo murió
+    public static event Action OnEnemyDefeated;
 
     void Start()
     {
@@ -32,7 +36,12 @@ public class Enemy : MonoBehaviour
             Ded.Play();
             PowerManager.Instance.CutPower();
 
-            
+            // 🔥 ¡ESTA LÍNEA FALTABA! Avisa a la puerta antes de morir.
+            if (OnEnemyDefeated != null)
+            {
+                OnEnemyDefeated.Invoke();
+            }
+
             controller.Die();
         }
     }
