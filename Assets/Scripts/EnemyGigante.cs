@@ -1,5 +1,6 @@
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.Events;
 
 public class EnemyGiant : MonoBehaviour
 {
@@ -23,6 +24,11 @@ public class EnemyGiant : MonoBehaviour
     public Transform player;
     public Animator animator;
     public Rigidbody rb;
+
+    [Header("Evento al Morir")]
+    // Esto creará una casilla en el Inspector (como un botón) para arrastrar la UI
+    public UnityEvent alMorir; [Header("Evento al Morir")]
+    
 
     public StudioEventEmitter ZombieHurt;
     public StudioEventEmitter ZombieRun;
@@ -166,7 +172,13 @@ public class EnemyGiant : MonoBehaviour
 
     
     gameObject.SetActive(false);
-}
+
+        // Ejecuta todo lo que hayamos metido en la casilla del Inspector
+        if (alMorir != null)
+        {
+            alMorir.Invoke();
+        }
+    }
 
     private void SetAnimationStates(bool chasing, bool attacking)
     {
