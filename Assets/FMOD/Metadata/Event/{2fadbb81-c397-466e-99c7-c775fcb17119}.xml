@@ -5,7 +5,7 @@
 			<value>Fondo</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d308d999-483e-418a-95ef-72b4f66076ae}</destination>
@@ -43,7 +43,6 @@
 	<object class="MasterTrack" id="{dbdabe13-0cab-44ff-bddd-53dfd61e16e9}">
 		<relationship name="modules">
 			<destination>{f0057e94-8347-4378-bc75-2d02d42eb0fb}</destination>
-			<destination>{0990b4e6-d3e5-4210-9bbc-cb344f66c74e}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{509c77e1-ece7-4a9c-8e58-808ca890cc32}</destination>
@@ -62,11 +61,7 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{e17780bb-1a5b-4604-8c36-b5be983f326a}" />
 	<object class="MarkerTrack" id="{9aac6283-cc3b-4a5f-b245-4b6ac02704f0}" />
-	<object class="Timeline" id="{5c19c513-85e1-4c4c-9a76-32ebdeef91ab}">
-		<relationship name="modules">
-			<destination>{0990b4e6-d3e5-4210-9bbc-cb344f66c74e}</destination>
-		</relationship>
-	</object>
+	<object class="Timeline" id="{5c19c513-85e1-4c4c-9a76-32ebdeef91ab}" />
 	<object class="ActionSheet" id="{39ebe09d-a0dd-4017-9d36-e1848ec7daea}">
 		<relationship name="modules">
 			<destination>{f0057e94-8347-4378-bc75-2d02d42eb0fb}</destination>
@@ -84,14 +79,6 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{f0057e94-8347-4378-bc75-2d02d42eb0fb}" />
-	<object class="SingleSound" id="{0990b4e6-d3e5-4210-9bbc-cb344f66c74e}">
-		<property name="length">
-			<value>29</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{6db571e2-7344-4427-8a51-caddda4949e4}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusEffectChain" id="{5d20574a-c3ee-4131-95c3-08347779d395}">
 		<relationship name="effects">
 			<destination>{c2a0803a-8d77-4ccc-8e47-5d61d5622ef6}</destination>

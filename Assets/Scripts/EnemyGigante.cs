@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 public class EnemyGiant : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class EnemyGiant : MonoBehaviour
     public Transform player;
     public Animator animator;
     public Rigidbody rb;
+
+    public StudioEventEmitter ZombieHurt;
+    public StudioEventEmitter ZombieRun;
+    public StudioEventEmitter ZombieAttack;
+    public StudioEventEmitter ZombieDed;
 
     private bool isChasing = false;
     private bool isAttacking = false;
@@ -48,6 +54,7 @@ public class EnemyGiant : MonoBehaviour
     public void RecibirDanio(int cantidad)
     {
         if (isDead) return;
+        ZombieHurt.Play();
 
         currentHealth -= cantidad;
         Debug.Log($"⚔️ {gameObject.name} recibió {cantidad} de daño. Vida restante: {currentHealth}");
@@ -58,6 +65,7 @@ public class EnemyGiant : MonoBehaviour
     // 👉 El gigante ataca al jugador (se llama desde animación)
     public void EventoGolpeEnemigo()
     {
+        ZombieAttack.Play();
         Collider[] objetosImpactados = Physics.OverlapSphere(puntoAtaque.position, rangoAtaque);
 
         foreach (Collider hit in objetosImpactados)
@@ -103,6 +111,8 @@ public class EnemyGiant : MonoBehaviour
         {
             SetAnimationStates(false, false);
             rb.linearVelocity = Vector3.zero;
+            if (ZombieRun != null && ZombieRun.IsPlaying())
+                ZombieRun.Stop();
             return;
         }
 
@@ -110,6 +120,10 @@ public class EnemyGiant : MonoBehaviour
 
         if (distance > rangoAtaque)
         {
+            if (ZombieRun != null && !ZombieRun.IsPlaying())
+            {
+                ZombieRun.Play();
+            }
             // Persecución
             isAttacking = false;
             Vector3 dir = (player.position - transform.position).normalized;
@@ -137,6 +151,12 @@ public class EnemyGiant : MonoBehaviour
     if (isDead) return;
 
     isDead = true;
+
+    if (ZombieRun != null)
+        ZombieRun.Stop();
+
+    if (ZombieDed != null)
+        ZombieDed.Play();
     animator.SetBool("isChasing", false);
     animator.SetBool("isAttacking", false);
     animator.SetBool("isDead", true);
