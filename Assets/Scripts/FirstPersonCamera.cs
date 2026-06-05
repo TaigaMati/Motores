@@ -2,6 +2,7 @@ using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 public class PrimeraPersona : MonoBehaviour
 {
@@ -271,4 +272,40 @@ public class PrimeraPersona : MonoBehaviour
         PlayerAnim.SetFloat("Y", newDirection.y);
         PlayerAnim.SetBool("isCrouching", isCrouching);//
     }
+
+    void OnEnable()
+    {
+        
+        // Le decimos que cuando se ejecute ("performed") la acción Exit,
+        // llame a nuestra función "IrAlMenu"
+        _inputAction.Player.VolverMenu.performed += ctx => IrAlMenu();
+    }
+
+    void OnDisable()
+    {
+        // Desvinculamos la acción al apagarse el objeto por seguridad y buena práctica
+        _inputAction.Player.VolverMenu.performed -= ctx => IrAlMenu();
+        _inputAction.Player.Disable();
+    }
+
+    private void IrAlMenu()
+    {
+        // 1. 🔥 LA CLAVE: Apagamos el mapa de inputs del jugador por completo.
+        // Esto evita que el personaje intente disparar o moverse "en el aire" en la otra escena.
+        if (_inputAction != null)
+        {
+            _inputAction.Player.Disable();
+        }
+
+        // 2. Liberamos el mouse para que el jugador pueda interactuar con el menú principal
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // 3. Por si acaso se quedó trabado algún efecto de cámara lenta o pausa previa
+        Time.timeScale = 1f;
+
+        // 4. Recién ahora hacemos el cambio físico de escena
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuInicio");
+    }
+
 }
