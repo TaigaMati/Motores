@@ -2,18 +2,30 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int damage = 1;
+    [Header("Daño de la bala")]
+    public int damage = 5;
 
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("💥 Bala impactó contra: " + collision.gameObject.name);
 
-        Enemy target = collision.gameObject.GetComponent<Enemy>();
-        if (target != null)
+        // Caso 1: enemigo normal con script Enemy
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            target.TakeDamage(damage);
+            enemy.TakeDamage(damage);
+            Debug.Log($"⚔️ Se aplicó {damage} de daño a Enemy");
         }
 
+        // Caso 2: enemigo gigante con script EnemyGiant
+        EnemyGiant giant = collision.gameObject.GetComponent<EnemyGiant>();
+        if (giant != null)
+        {
+            giant.RecibirDanio(damage);
+            Debug.Log($"⚔️ Se aplicó {damage} de daño a EnemyGiant");
+        }
+
+        // La bala se destruye al impactar
         Destroy(gameObject);
     }
 }

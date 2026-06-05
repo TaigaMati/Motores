@@ -6,6 +6,7 @@ using FMODUnity;
 public class PowerManager : MonoBehaviour
 {
     public static PowerManager Instance;
+    public static event System.Action OnPowerRestored; // 🔔 evento global
 
     public StudioEventEmitter LightsOn;
     public StudioEventEmitter LightsOff;
@@ -22,12 +23,15 @@ public class PowerManager : MonoBehaviour
     {
         Instance = this;
     }
+
     public void RestorePower()
     {
         LightsOn.Play();
         powerOn = true;
-        Debug.Log(" Energía restaurada");
-        // para activar el panel de texto
+        Debug.Log("⚡ Energía restaurada");
+
+        OnPowerRestored?.Invoke();
+
         panelTextRestorePower.gameObject.SetActive(true);
         panelTextCutPower.gameObject.SetActive(false);
         StartCoroutine(HideTextAfterSeconds(5f));
@@ -37,8 +41,8 @@ public class PowerManager : MonoBehaviour
     {
         LightsOff.Play();
         powerOn = false;
-        Debug.Log(" Energía cortada");
-        // para activar panel de texto
+        Debug.Log("⚡ Energía cortada");
+
         panelTextCutPower.gameObject.SetActive(true);
         StartCoroutine(HideTextAfterSeconds(15f));
     }

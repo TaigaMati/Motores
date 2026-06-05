@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76165cbe35f71254e9b354dd52f23695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuDerrota
-  defeatMenu: {fileID: 22052086}
 --- !u!1 &98087626
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +986,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 8a429bcd1898a3541b95bedec01d395c, type: 3}
+  m_Texture: {fileID: 2800000, guid: 57181452462841f4f8925addf46b1d48, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
