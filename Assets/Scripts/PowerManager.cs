@@ -44,7 +44,7 @@ public class PowerManager : MonoBehaviour
         Debug.Log("⚡ Energía cortada");
 
         panelTextCutPower.gameObject.SetActive(true);
-        StartCoroutine(HideTextAfterSeconds(15f));
+        StartCoroutine(HideTextAfterSeconds(25f));
     }
 
     // Coroutine duración de los paneles
