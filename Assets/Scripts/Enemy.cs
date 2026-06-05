@@ -24,17 +24,24 @@ public class Enemy : MonoBehaviour
                   " recibió " + amount +
                   " de daño. Vida restante: " + currentHealth);
 
-        if (currentHealth <= 0)
-        {
-            if (musicManager != null)
-            {
-                musicManager.OnEnemyDeath();
-            }
+ if (currentHealth <= 0)
+{
+    if (musicManager != null)
+    {
+        musicManager.OnEnemyDeath();
+    }
 
-            PowerManager.Instance.CutPower();
-            controller.Die();
-            Destroy(gameObject);
-        }
+    // Buscar la zona y desactivarla
+    CombatZone zona = FindObjectOfType<CombatZone>();
+    if (zona != null)
+    {
+        zona.DesactivarZona();
+    }
+
+    PowerManager.Instance.CutPower();
+    controller.Die();
+    Destroy(gameObject);
+}
     }
 
     // 👀 Detectar al jugador

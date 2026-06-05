@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Diagnostics;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Debug = UnityEngine.Debug;
+
 public class PrimeraPersona : MonoBehaviour
 {
     [Header("Movimiento")]
@@ -27,6 +27,12 @@ public class PrimeraPersona : MonoBehaviour
     [Header("Linterna")]
     public Light flashlight;
     private bool flashlightOn = false;
+
+    [Header("Sonidos de pasos")]
+    public AudioSource audioSource;
+    public AudioClip[] footstepClips;
+    public float stepInterval = 0.5f;
+    private float stepTimer;
 
     private PlayerInputAction _inputAction;
     private CharacterController _characterController;
@@ -105,6 +111,7 @@ public class PrimeraPersona : MonoBehaviour
         Movement();
         Look();
         AnimLogic();
+        Footsteps(); // nuevo
     }
 
     private void Movement()
@@ -269,6 +276,32 @@ public class PrimeraPersona : MonoBehaviour
     {
         PlayerAnim.SetFloat("X", newDirection.x);
         PlayerAnim.SetFloat("Y", newDirection.y);
-        PlayerAnim.SetBool("isCrouching", isCrouching);//
+        PlayerAnim.SetBool("isCrouching", isCrouching);
+    }
+
+   private void Footsteps()
+    {
+        // Usamos Animator params para decidir si realmente está caminando
+        bool isMoving = _characterController.isGrounded &&
+                        (Mathf.Abs(newDirection.x) > 0.1f || Mathf.Abs(newDirection.y) > 0.1f);
+
+        if (isMoving)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0f)
+            {
+                if (footstepClips.Length > 0)
+                {
+                    int index = Random.Range(0, footstepClips.Length);
+                    audioSource.PlayOneShot(footstepClips[index]);
+                }
+                stepTimer = stepInterval;
+            }
+        }
+        else
+        {
+            //  Si no hay movimiento, reinicia el temporizador
+            stepTimer = stepInterval;
+        }
     }
 }
